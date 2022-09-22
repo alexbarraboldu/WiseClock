@@ -10,8 +10,8 @@ public:
 	~EngineBase();
 
 	void engineLoop();
+	void ExitEngine();
 
-	void doStuff(bool a = false);
 	virtual void Update() = 0;
 	virtual void Renderer() = 0;
 

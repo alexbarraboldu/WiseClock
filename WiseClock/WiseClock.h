@@ -4,6 +4,11 @@
 #include "EngineBase.h"
 #include "Header.h"
 
+///	Coordenadas para poner los números donde tocan
+///	Y=3;X=2		-> Para la izq.
+///	Y=3;X=11	-> Para la der.
+///	Y=3;x9		-> Para los puntos.
+
 class WiseClock : EngineBase
 {
 public:
@@ -14,14 +19,12 @@ public:
 
 	cImage* imgBuffer;
 
-	cImage* player;
 
 private:
 	void Start();
 	void Update() override;
 	void Renderer();
 
-	void JumpPlayer();
 };
 
 #endif // !WISE_CLOCK_H

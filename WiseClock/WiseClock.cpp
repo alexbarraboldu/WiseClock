@@ -5,15 +5,12 @@
 WiseClock::WiseClock()
 {
 	imgBuffer = new cImage(WIDTH, HEIGHT, 0, 0);
-	player = new cImage(0, 0, 9, 2);
 }
 
 WiseClock::~WiseClock() {
 	delete[] imgBuffer->image;
 	delete imgBuffer;
 
-	delete[] player->image;
-	delete player;
 }
 
 void WiseClock::ExecuteWiseClock()
@@ -25,30 +22,15 @@ void WiseClock::ExecuteWiseClock()
 ///	Aquí se inicializa todo lo relacionado con el reloj.
 void WiseClock::Start()
 {
-	///	Cargar todas las imagenes
-	///		Lo más probable es que se tenga que crear un tipo que contenga cImage y tenga un ID (enum?)
-	///		así podremos distinguir los objetos.
-	///		Se puede crear también otras clases que contengan programas a ejecutarse dentro del bucle.
-
 	///	Asignar valores por defecto a la pantalla.
 	for (size_t i = 0; i < WIDTH * HEIGHT; i++)
 	{
 		imgBuffer->image[i] = false;
 	}
 
-	///	MODO Juego
-	///	Añadimos el suelo
-	cImage ground = LoadImageFromFile_TXT("img_ground.txt");
+	///	MODO Clock
 
-	*imgBuffer = *imgBuffer << ground;
 
-	*player = LoadImageFromFile_TXT("img_player.txt");
-	player->posX = 9;
-	player->posY = 4;
-
-	*imgBuffer = *imgBuffer << *player;
-
-	delete[] ground.image;
 }
 
 
@@ -61,19 +43,13 @@ void WiseClock::Update()
 		switch (_getch())
 		{
 		case 32:
-			JumpPlayer();
+			ExitEngine();
 			break;
 		default:
 			break;
 		}
 	}
 
-}
-
-void WiseClock::JumpPlayer()
-{
-	player->posY -= 2;
-	*imgBuffer = *imgBuffer << *player;
 }
 
 ///	Aquí se actualiza todo lo gráfico.

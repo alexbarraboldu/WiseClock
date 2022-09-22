@@ -134,6 +134,7 @@
     <ClCompile Include="WiseClock.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClockProgram.h" />
     <ClInclude Include="EngineBase.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="WiseClock.h" />

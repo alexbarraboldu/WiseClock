@@ -12,11 +12,16 @@ EngineBase::EngineBase()
 
 	timesUnderDeltaTime = 0;
 
-	quitEngineLoop = true;
+	quitEngineLoop = false;
 
 }
 
 EngineBase::~EngineBase() {}
+
+void EngineBase::ExitEngine()
+{
+	quitEngineLoop = true;
+}
 
 void EngineBase::engineLoop()
 {
@@ -31,7 +36,7 @@ void EngineBase::engineLoop()
 
 	std::chrono::high_resolution_clock::duration m_DeltaTime;
 
-	while (true)
+	while (!quitEngineLoop)
 	{
 		////----------------------------------------------
 		////
@@ -83,25 +88,5 @@ double EngineBase::clockToMilliseconds(clock_t ticks) {
 double EngineBase::clockToNanoseconds(clock_t ticks) {
 	// units/(units/time) => time (seconds) * 1000000 = nanoseconds
 	return (ticks / (double)CLOCKS_PER_SEC) * 1000000.0f;
-}
-
-void EngineBase::doStuff(bool a)
-{
-	for (size_t i = 0; i < 100000; i++)
-	{
-		int lmao = i;
-		if (a) {
-			int* lol = new int;
-			*lol = lmao;
-			lmao++;
-
-			delete lol;
-		}
-		else {
-			int* lol = &lmao;
-			lmao++;
-		}
-
-	}
 }
 
