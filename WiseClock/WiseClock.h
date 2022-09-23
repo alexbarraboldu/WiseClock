@@ -4,7 +4,7 @@
 #include "EngineBase.h"
 #include "Header.h"
 
-class WiseClock : EngineBase
+class WiseClock : public EngineBase
 {
 public:
 	WiseClock();
@@ -15,7 +15,7 @@ public:
 	cImage* imgBuffer;
 
 
-private:
+protected:
 	///	Called on ExecuteWiseClock
 	virtual void Start() = 0;
 	///	Called every frame

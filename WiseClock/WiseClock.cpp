@@ -61,6 +61,7 @@ void WiseClock::Renderer()
 
 	///	Dibujar la imagen final en pantalla
 	int imgLength = imgBuffer->width * imgBuffer->height;
+	char charToPrint = ' ';
 	for (size_t i = 0, j = 1; i < imgLength; i++)
 	{
 		if (i == imgBuffer->width * j)
@@ -68,7 +69,10 @@ void WiseClock::Renderer()
 			++j;
 			std::cout << '\n';
 		}
-		std::cout << imgBuffer->image[i] << ' ';
+
+		if (imgBuffer->image[i]) charToPrint = 'O';
+		else charToPrint = ' ';
+		std::cout << charToPrint << ' ';
 	}
 
 	///	Dibujar el framerate

@@ -42,6 +42,9 @@ cImage operator << (cImage const& objA, cImage const& objB)
 ///	Operador para sumar
 ///	Crea una nueva matriz del tamaño de los boundaries de las dos matrices sumadas.
 ///	Dandole la posición que pertoca.
+/// 
+/// Esta función no tiene en cuenta el width o height
+/// de la imagen, sino que tiene en cuenta que valores son TRUE y ya.
 cImage operator + (cImage const& objA, cImage const& objB)
 {
 	cImage aux;
