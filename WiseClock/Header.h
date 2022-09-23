@@ -26,6 +26,7 @@ struct cImage
 };
 
 cImage LoadImageFromFile_TXT(const char* fileName);
+cImage* LoadImagesFromFile_TXT(const char* fileName);
 
 std::ostream& operator << (std::ostream& os, const cImage& img);
 cImage operator << (cImage const& objA, cImage const& objB);

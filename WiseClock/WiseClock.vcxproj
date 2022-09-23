@@ -128,12 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cImageProcessing.cpp" />
+    <ClCompile Include="Clock.cpp" />
     <ClCompile Include="EngineBase.cpp" />
     <ClCompile Include="FStream.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="WiseClock.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Clock.h" />
     <ClInclude Include="ClockProgram.h" />
     <ClInclude Include="EngineBase.h" />
     <ClInclude Include="Header.h" />

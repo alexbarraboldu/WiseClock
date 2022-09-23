@@ -1,9 +1,9 @@
 #include "Header.h"
-#include "WiseClock.h"
+#include "Clock.h"
 
 int main()
 {
-	WiseClock* wiseClock = new WiseClock();
+	Clock* wiseClock = new Clock("img_numbers.txt");
 
 	wiseClock->ExecuteWiseClock();
 

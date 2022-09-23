@@ -1,6 +1,6 @@
 #include "WiseClock.h"
 
-#include <conio.h>
+//#include <conio.h>
 
 WiseClock::WiseClock()
 {
@@ -36,21 +36,21 @@ void WiseClock::Start()
 
 ///	Aquí se actualiza toda la lógica.
 /// Este Update se actualiza a 60fps (ver EngineBase constructor).
-void WiseClock::Update()
-{
-	if (_kbhit())
-	{
-		switch (_getch())
-		{
-		case 32:
-			ExitEngine();
-			break;
-		default:
-			break;
-		}
-	}
-
-}
+//void WiseClock::Update()
+//{
+//	if (_kbhit())
+//	{
+//		switch (_getch())
+//		{
+//		case 32:
+//			ExitEngine();
+//			break;
+//		default:
+//			break;
+//		}
+//	}
+//
+//}
 
 ///	Aquí se actualiza todo lo gráfico.
 ///	Este update se actualiza a 60fps (ver EngineBase constructor).
