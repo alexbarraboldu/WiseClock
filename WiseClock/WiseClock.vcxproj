@@ -136,7 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h" />
-    <ClInclude Include="ClockProgram.h" />
     <ClInclude Include="EngineBase.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="WiseClock.h" />

@@ -44,9 +44,6 @@
     <ClInclude Include="WiseClock.h">
       <Filter>Archivos de recursos</Filter>
     </ClInclude>
-    <ClInclude Include="ClockProgram.h">
-      <Filter>Archivos de recursos</Filter>
-    </ClInclude>
     <ClInclude Include="Clock.h">
       <Filter>Archivos de recursos</Filter>
     </ClInclude>

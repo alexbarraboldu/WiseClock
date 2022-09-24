@@ -2,7 +2,7 @@
 
 EngineBase::EngineBase()
 {
-	frameRate = -1;
+	frameRate = 2;
 
 	deltaTime = 1000.0f / frameRate;
 

@@ -1,14 +1,5 @@
 #include "WiseClock.h"
 
-///	Coordenadas para poner los números donde tocan
-///	Y=0;X=2		-> Para la izq.
-///	Y=0;X=6		-> Para la der.
-///	Y=0;x9		-> Para los puntos.
-
-///	He de añadir 5 imagenes a emptyScreen
-///	De izquierda a derecha.
-/// Luego mirar optimizaciones.
-
 enum ClockNumbers
 {
 	ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, DOTS
@@ -43,17 +34,22 @@ public:
 private:
 
 	const char* clockNumbersFileName;
-	const int numbers = 11;
 
-	cImage* clockNumbers;
+	int hours;
+	int minutes;
+	int seconds;
+
 	cImage emptyScreen;
-	ClockTime clockTime;
+	cImage* imgClockNumbers;
 
-	int clockIterator;
+	ClockTime clockTime;
+	ClockNumbers currentClockNumbers[5];
 
 	void LoadClockNumbers();
-	void RenderClockNumbers(int i);
-	cImage GetClockNumber(ClockNumbers clockNumber);
 	void SetClockTimeNumbersPosition();
-	void SetClockTimeNumbersValue(ClockNumbers* arr = new ClockNumbers());
+
+	void CalculateTime();
+	void CastTimeToClockNumbers();
+	void SetClockTimeNumbersValue();
+	void RenderClockNumbers();
 };

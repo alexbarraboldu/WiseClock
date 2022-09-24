@@ -3,7 +3,6 @@
 Clock::Clock(const char* _clockNumbersFileName)
 {
 	clockNumbersFileName = _clockNumbersFileName;
-	//numbers = _numbers;
 	LoadClockNumbers();
 	emptyScreen = cImage(WIDTH, HEIGHT, 0,0);
 }
@@ -20,42 +19,36 @@ void Clock::Start()
 	}
 
 	clockTime = ClockTime();
-	SetClockTimeNumbersValue();
-	SetClockTimeNumbersPosition();
+
+		SetClockTimeNumbersValue();
 }
 
 void Clock::Update()
 {
+
 }
+
 void Clock::EverySecond()
 {
-	++clockIterator;
+	CalculateTime();
+	CastTimeToClockNumbers();
+	SetClockTimeNumbersValue();
 
-	if (clockIterator > numbers)
-	{
-		clockIterator = 0;
-	}
-
-	RenderClockNumbers(clockIterator);
+	RenderClockNumbers();
 }
 
 ///	Class functions
 
 void Clock::LoadClockNumbers()
 {
-	clockNumbers = LoadImagesFromFile_TXT(clockNumbersFileName);
+	imgClockNumbers = LoadImagesFromFile_TXT(clockNumbersFileName);
 }
 
-void Clock::RenderClockNumbers(int i)
+void Clock::RenderClockNumbers()
 {
 	*imgBuffer = emptyScreen << (clockTime.hour_0 +	clockTime.hour_1);
 	*imgBuffer = *imgBuffer << (clockTime.dots);
 	*imgBuffer = *imgBuffer << (clockTime.minute_0 + clockTime.minute_1);
-}
-
-cImage Clock::GetClockNumber(ClockNumbers clockNumber)
-{
-	return clockNumbers[int(clockNumber)];
 }
 
 void Clock::SetClockTimeNumbersPosition()
@@ -76,22 +69,57 @@ void Clock::SetClockTimeNumbersPosition()
 	clockTime.minute_1.posY = 1;
 }
 
-void Clock::SetClockTimeNumbersValue(ClockNumbers* arr)
+void Clock::SetClockTimeNumbersValue()
 {
 	///	Se tiene que implementar la lógica para llamar a esta función.
 	///	Se puede hacer luego que solo se actualice según el valor que cambia.
 	/// Puede que esto último esté relacionado con el RenderClockNumbers;
 
-	//clockTime.hour_0 = GetClockNumber(arr[0]);
-	//clockTime.hour_1 = GetClockNumber(arr[1]);
-	//clockTime.dots = GetClockNumber(arr[2]);
-	//clockTime.minute_0 = GetClockNumber(arr[3]);
-	//clockTime.minute_1 = GetClockNumber(arr[4]);
+	clockTime.hour_0	= imgClockNumbers[(int)currentClockNumbers[0]];
+	clockTime.hour_1	= imgClockNumbers[(int)currentClockNumbers[1]];
+	clockTime.dots		= imgClockNumbers[(int)currentClockNumbers[2]];
+	clockTime.minute_0	= imgClockNumbers[(int)currentClockNumbers[3]];
+	clockTime.minute_1	= imgClockNumbers[(int)currentClockNumbers[4]];
 
-	clockTime.hour_0 = GetClockNumber(ClockNumbers::ONE);
-	clockTime.hour_1 = GetClockNumber(ClockNumbers::EIGHT);
-	clockTime.dots = GetClockNumber(ClockNumbers::DOTS);
-	clockTime.minute_0 = GetClockNumber(ClockNumbers::TWO);
-	clockTime.minute_1 = GetClockNumber(ClockNumbers::THREE);
+	SetClockTimeNumbersPosition();
+}
+
+void Clock::CastTimeToClockNumbers()
+{
+	int firstHourDigit = hours % 10;
+	int secondHourDigit = (hours / 10) % 10;
+
+	int firstMinuteDigit = minutes % 10;
+	int secondMinuteDigit = (minutes / 10) % 10;
+
+	currentClockNumbers[0] = (ClockNumbers)secondHourDigit;
+	currentClockNumbers[1] = (ClockNumbers)firstHourDigit;
+	currentClockNumbers[2] = ClockNumbers::DOTS;
+	currentClockNumbers[3] = (ClockNumbers)secondMinuteDigit;
+	currentClockNumbers[4] = (ClockNumbers)firstMinuteDigit;
+}
+
+void Clock::CalculateTime()
+{
+	///	This should add one at a time.
+	///	By adding 60 we make the minutes the seconds and the hours the minutes.
+	seconds += 60;
+
+	if (seconds > 59)
+	{
+		seconds = 0;
+		++minutes;
+
+		if (minutes > 59)
+		{
+			minutes = 0;
+			++hours;
+
+			if (hours > 23)
+			{
+				hours = 0;
+			}
+		}
+	}
 }
 
