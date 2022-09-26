@@ -271,14 +271,41 @@ void Clock::ChooseClockType()
 		Reset();
 		SetClockType(ClockMode::TIMER);
 		///	Permitir introducir fecha
+		InputDate();
 		break;
 	case 51:			//	3
 		Reset();
 		SetClockType(ClockMode::STOP_WATCH);
 		///	Permitir introducir fecha
+		InputDate();
 		break;
 	default:
 		break;
 	}
+}
+
+void Clock::InputDate()
+{
+	char date[9];
+
+	std::cout << "Introduce the date as the next format hh/mm/ss: " << std::endl;
+	std::cin.clear();
+	std::cin.sync();
+	std::cin >> date;
+
+	char individualDate[2];
+
+	individualDate[0] = date[0];
+	individualDate[1] = date[1];
+	hours = atoi(individualDate);
+
+
+	individualDate[0] = date[3];
+	individualDate[1] = date[4];
+	minutes = atoi(individualDate);
+
+	individualDate[0] = date[6];
+	individualDate[1] = date[7];
+	seconds = atoi(individualDate);
 }
 

@@ -108,5 +108,7 @@ private:
 	void TimerMode();
 	void SystemClockMode();
 
+	void InputDate();
+
 };
 #endif // !CLOCK_H
