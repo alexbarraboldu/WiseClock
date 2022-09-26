@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-const int WIDTH = 19;
+const int WIDTH = 29;
 const int HEIGHT = 7;
 
 struct cImage

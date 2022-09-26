@@ -20,7 +20,7 @@ void Clock::Start()
 
 	clockTime = ClockTime();
 
-		SetClockTimeNumbersValue();
+	SetClockTimeNumbersValue();
 }
 
 void Clock::Update()
@@ -47,8 +47,15 @@ void Clock::LoadClockNumbers()
 void Clock::RenderClockNumbers()
 {
 	*imgBuffer = emptyScreen << (clockTime.hour_0 +	clockTime.hour_1);
-	*imgBuffer = *imgBuffer << (clockTime.dots);
+	*imgBuffer = *imgBuffer << (clockTime.dots_0);
 	*imgBuffer = *imgBuffer << (clockTime.minute_0 + clockTime.minute_1);
+
+	///	Esto controla que se renderice los segundos. Se tendría que cambiar en otro sitio, para así centrar o modificar la posición del reloj. O cambiar el canvas a renderizar.
+	if (true)
+	{
+		*imgBuffer = *imgBuffer << (clockTime.dots_1);
+		*imgBuffer = *imgBuffer << (clockTime.second_0 + clockTime.second_1);
+	}
 }
 
 void Clock::SetClockTimeNumbersPosition()
@@ -59,27 +66,36 @@ void Clock::SetClockTimeNumbersPosition()
 	clockTime.hour_1.posX = 5;
 	clockTime.hour_1.posY = 1;
 
-	clockTime.dots.posX = 8;
-	clockTime.dots.posY = 1;
+	clockTime.dots_0.posX = 8;
+	clockTime.dots_0.posY = 1;
 
 	clockTime.minute_0.posX = 11;
 	clockTime.minute_0.posY = 1;
 
 	clockTime.minute_1.posX = 15;
 	clockTime.minute_1.posY = 1;
+
+	clockTime.dots_1.posX = 18;
+	clockTime.dots_1.posY = 1;
+
+	clockTime.second_0.posX = 21;
+	clockTime.second_0.posY = 1;
+
+	clockTime.second_1.posX = 25;
+	clockTime.second_1.posY = 1;
+
 }
 
 void Clock::SetClockTimeNumbersValue()
 {
-	///	Se tiene que implementar la lógica para llamar a esta función.
-	///	Se puede hacer luego que solo se actualice según el valor que cambia.
-	/// Puede que esto último esté relacionado con el RenderClockNumbers;
-
 	clockTime.hour_0	= imgClockNumbers[(int)currentClockNumbers[0]];
 	clockTime.hour_1	= imgClockNumbers[(int)currentClockNumbers[1]];
-	clockTime.dots		= imgClockNumbers[(int)currentClockNumbers[2]];
+	clockTime.dots_0	= imgClockNumbers[(int)currentClockNumbers[2]];
 	clockTime.minute_0	= imgClockNumbers[(int)currentClockNumbers[3]];
 	clockTime.minute_1	= imgClockNumbers[(int)currentClockNumbers[4]];
+	clockTime.dots_1	= imgClockNumbers[(int)currentClockNumbers[2]];
+	clockTime.second_0	= imgClockNumbers[(int)currentClockNumbers[5]];
+	clockTime.second_1	= imgClockNumbers[(int)currentClockNumbers[6]];
 
 	SetClockTimeNumbersPosition();
 }
@@ -92,18 +108,23 @@ void Clock::CastTimeToClockNumbers()
 	int firstMinuteDigit = minutes % 10;
 	int secondMinuteDigit = (minutes / 10) % 10;
 
+	int firstSecondDigit = seconds % 10;
+	int secondSecondDigit = (seconds / 10) % 10;
+
 	currentClockNumbers[0] = (ClockNumbers)secondHourDigit;
 	currentClockNumbers[1] = (ClockNumbers)firstHourDigit;
 	currentClockNumbers[2] = ClockNumbers::DOTS;
 	currentClockNumbers[3] = (ClockNumbers)secondMinuteDigit;
 	currentClockNumbers[4] = (ClockNumbers)firstMinuteDigit;
+	currentClockNumbers[5] = (ClockNumbers)secondSecondDigit;
+	currentClockNumbers[6] = (ClockNumbers)firstSecondDigit;
 }
 
 void Clock::CalculateTime()
 {
 	///	This should add one at a time.
 	///	By adding 60 we make the minutes the seconds and the hours the minutes.
-	seconds += 60;
+	++seconds;
 
 	if (seconds > 59)
 	{
