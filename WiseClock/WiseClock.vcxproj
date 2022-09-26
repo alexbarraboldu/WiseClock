@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="cImageProcessing.cpp" />
     <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="ClockWiseEngine.cpp" />
     <ClCompile Include="EngineBase.cpp" />
     <ClCompile Include="FStream.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -136,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="ClockWiseEngine.h" />
     <ClInclude Include="EngineBase.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="WiseClock.h" />

@@ -1,4 +1,9 @@
-#include "WiseClock.h"
+#ifndef CLOCK_H
+#define CLOCK_H
+
+#include "Header.h"
+
+#include <time.h>
 
 enum ClockNumbers
 {
@@ -24,6 +29,11 @@ struct ClockTime
 	cImage second_1;
 };
 
+enum ClockMode
+{
+	SYSTEM_CLOCK, STOP_WATCH, TIMER
+};
+
 ///	He de separar esta classe de WiseClock,
 ///	para así poder ejecutarla cuando quiera desde la aplicación WiseClock.
 /// 
@@ -47,37 +57,56 @@ struct ClockTime
 /// Así Clock tiene un menú suyo, cada modo tiene su menú y todos los modos pueden volver al modo original.
 /// 
 
-class Clock : public WiseClock
+class Clock 
 {
 public:
 
-	Clock(const char* _clockNumbersFileName);
+	//void Update() override
+	Clock(const char* clockNumbersFileName);
+	Clock(const char* clockNumbersFileName, int hours, int minutes, int seconds);
 	~Clock();
+	void OnStart();
+	void OnEverySecond();
 
-	void Start() override;
-	void Update() override;
+	cImage* OnRender();
 
-	void EverySecond() override;
+	void SetTime(int hours, int minutes, int seconds);
+	virtual void StartStop();
+	virtual void Reset();
+
+	void SetClockType(ClockMode clockType);
+
+	void ChooseClockType();
+
+protected:
+	virtual void CalculateTime();
 
 private:
 
-	const char* clockNumbersFileName;
+	bool startClock;
+	ClockMode currentClockMode;
 
 	int hours;
 	int minutes;
 	int seconds;
 
+	cImage* clockImgBuffer;
 	cImage emptyScreen;
 	cImage* imgClockNumbers;
 
 	ClockTime clockTime;
 	ClockNumbers currentClockNumbers[7];
 
-	void LoadClockNumbers();
+	void LoadClockNumbers(const char* clockNumbersFileName);
 	void SetClockTimeNumbersPosition();
 
-	void CalculateTime();
 	void CastTimeToClockNumbers();
 	void SetClockTimeNumbersValue();
 	void RenderClockNumbers();
+
+	void StopWatchMode();
+	void TimerMode();
+	void SystemClockMode();
+
 };
+#endif // !CLOCK_H

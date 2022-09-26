@@ -1,26 +1,27 @@
 #ifndef WISE_CLOCK_H
 #define WISE_CLOCK_H
 
-#include "EngineBase.h"
-#include "Header.h"
+#include "ClockWiseEngine.h"
+#include "Clock.h"
 
-class WiseClock : public EngineBase
+class WiseClock : public ClockWiseEngine
 {
 public:
 	WiseClock();
+	WiseClock(const char* _clockNumbersFileName);
+	WiseClock(const char* _clockNumbersFileName, int hours, int minutes, int seconds);
 	~WiseClock();
 
-	void ExecuteWiseClock();
-
-	cImage* imgBuffer;
-
+	Clock* clockProgram;
 
 protected:
 	///	Called on ExecuteWiseClock
-	virtual void Start() = 0;
+	void Start();
 	///	Called every frame
-	virtual void Update() = 0;
-	virtual void Renderer();
+	void Update();
+	void Renderer();
+	///	Called every second
+	void EverySecond();
 
 };
 

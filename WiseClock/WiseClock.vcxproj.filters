@@ -13,39 +13,63 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de origen\ClockPrograms">
+      <UniqueIdentifier>{df837091-eb40-482f-9352-45419a3f2d6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de recursos\ClockPrograms">
+      <UniqueIdentifier>{949863f5-1824-46fb-946e-24483df45762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Utils">
+      <UniqueIdentifier>{35a1a6ff-cc09-4401-adbf-afa90976e187}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de recursos\Utils">
+      <UniqueIdentifier>{5427b99b-48f6-45d1-9f41-1308d6f5ff43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Engine">
+      <UniqueIdentifier>{be6a8219-de7f-412a-ac00-10a96660b82f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de recursos\Engine">
+      <UniqueIdentifier>{362ae139-6e32-40fe-a8ff-b8fecba0a485}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="FStream.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Clock.cpp">
+      <Filter>Archivos de origen\ClockPrograms</Filter>
     </ClCompile>
     <ClCompile Include="cImageProcessing.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="FStream.cpp">
+      <Filter>Archivos de origen\Utils</Filter>
     </ClCompile>
     <ClCompile Include="EngineBase.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ClockWiseEngine.cpp">
+      <Filter>Archivos de origen\Engine</Filter>
     </ClCompile>
     <ClCompile Include="WiseClock.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Clock.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\ClockPrograms</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Clock.h">
+      <Filter>Archivos de recursos\ClockPrograms</Filter>
+    </ClInclude>
     <ClInclude Include="Header.h">
-      <Filter>Archivos de recursos</Filter>
+      <Filter>Archivos de recursos\Utils</Filter>
     </ClInclude>
     <ClInclude Include="EngineBase.h">
-      <Filter>Archivos de recursos</Filter>
+      <Filter>Archivos de recursos\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ClockWiseEngine.h">
+      <Filter>Archivos de recursos\Engine</Filter>
     </ClInclude>
     <ClInclude Include="WiseClock.h">
-      <Filter>Archivos de recursos</Filter>
-    </ClInclude>
-    <ClInclude Include="Clock.h">
-      <Filter>Archivos de recursos</Filter>
+      <Filter>Archivos de recursos\ClockPrograms</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

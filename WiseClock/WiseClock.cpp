@@ -1,83 +1,72 @@
 #include "WiseClock.h"
 
-//#include <conio.h>
+#include <conio.h>
 
 WiseClock::WiseClock()
 {
-	imgBuffer = new cImage(WIDTH, HEIGHT, 0, 0);
+	clockProgram = nullptr;
 }
 
-WiseClock::~WiseClock() {
-	delete[] imgBuffer->image;
-	delete imgBuffer;
-
-}
-
-void WiseClock::ExecuteWiseClock()
+WiseClock::WiseClock(const char* _clockNumbersFileName)
 {
-	Start();
-	EngineBase::engineLoop();
+	clockProgram = new Clock(_clockNumbersFileName);
 }
+
+WiseClock::WiseClock(const char* _clockNumbersFileName, int hours, int minutes, int seconds)
+{
+	clockProgram = new Clock(_clockNumbersFileName, hours, minutes, seconds);
+}
+
+WiseClock::~WiseClock() { }
+
 
 ///	Aquí se inicializa todo lo relacionado con el reloj.
 void WiseClock::Start()
 {
-	///	Asignar valores por defecto a la pantalla.
-	for (size_t i = 0; i < WIDTH * HEIGHT; i++)
-	{
-		imgBuffer->image[i] = false;
-	}
-
+	ClockWiseEngine::Start();
 	///	MODO Clock
-
-
+	clockProgram->OnStart();
 }
 
 
 ///	Aquí se actualiza toda la lógica.
 /// Este Update se actualiza a 60fps (ver EngineBase constructor).
-//void WiseClock::Update()
-//{
-//	if (_kbhit())
-//	{
-//		switch (_getch())
-//		{
-//		case 32:
-//			ExitEngine();
-//			break;
-//		default:
-//			break;
-//		}
-//	}
-//
-//}
+/// 
+/// Crear una función virtual que se llame InputHandler() y vaya aquí, así los programas
+/// puestos podrán manejar input independientemente
+void WiseClock::Update()
+{
+	if (_kbhit())
+	{
+		switch (_getch())
+		{
+		case 27:			///	ESC
+			ExitEngine();
+			break;
+		case 13:			///	Enter
+			clockProgram->StartStop();
+			break;
+		case 8:				///	Backspace
+			clockProgram->Reset();
+		case 32:			///	Spacebar
+			clockProgram->ChooseClockType();
+		default:
+			break;
+		}
+	}
+
+}
 
 ///	Aquí se actualiza todo lo gráfico.
 ///	Este update se actualiza a 60fps (ver EngineBase constructor).
 void WiseClock::Renderer()
 {
-	///	Limpiar pantalla	|	Se puede limpiar la pantalla de manera custom, puede que sea menos costoso
-	system("cls");
+	ClockWiseEngine::Renderer();
 
-	///	Dibujar la imagen final en pantalla
-	int imgLength = imgBuffer->width * imgBuffer->height;
-	char charToPrint = ' ';
-	for (size_t i = 0, j = 1; i < imgLength; i++)
-	{
-		if (i == imgBuffer->width * j)
-		{
-			++j;
-			std::cout << '\n';
-		}
+	imgBuffer = clockProgram->OnRender();
+}
 
-		if (imgBuffer->image[i]) charToPrint = 'O';
-		else charToPrint = ' ';
-		std::cout << charToPrint << ' ';
-	}
-
-	///	Dibujar el framerate
-	std::cout << '\n' << FPS << '\n';
-
-	///	Limpiar output buffer
-	std::cout << std::flush;
+void WiseClock::EverySecond()
+{
+	clockProgram->OnEverySecond();
 }

@@ -14,8 +14,7 @@ public:
 
 	virtual void Update() = 0;
 	virtual void Renderer() = 0;
-
-	virtual void EverySecond();
+	virtual void EverySecond() = 0;
 
 	int frameRate;
 	unsigned int FPS;
