@@ -17,7 +17,10 @@ WiseClock::WiseClock(const char* _clockNumbersFileName, int hours, int minutes, 
 	clockProgram = new Clock(_clockNumbersFileName, hours, minutes, seconds);
 }
 
-WiseClock::~WiseClock() { }
+WiseClock::~WiseClock()
+{
+	delete clockProgram;
+}
 
 
 ///	Aquí se inicializa todo lo relacionado con el reloj.

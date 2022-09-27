@@ -24,7 +24,17 @@ Clock::Clock(const char* clockNumbersFileName, int _hours, int _minutes, int _se
 	SetTime(_hours, _minutes, _seconds);
 }
 
-Clock::~Clock() { }
+Clock::~Clock()
+{
+	delete[] clockImgBuffer->image;
+	delete clockImgBuffer;
+
+	for (size_t i = 0; i < 11; i++)
+	{
+		delete[] imgClockNumbers[i].image;
+	}
+	delete[] imgClockNumbers;
+}
 
 void Clock::OnStart()
 {
